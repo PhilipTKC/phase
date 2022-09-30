@@ -1,0 +1,14 @@
+<div class="p-2 text-sm font-bold bg-indigo-100 rounded">
+  <div if.bind="activeSounds && activeSounds.length === 0" class="p-2">
+    No sounds have been added, Add sounds to start mixing.
+  </div>
+  <div class="grid grid-cols-1 p-2 mx-auto gap-x-8 gap-y-4 md:grid-cols-4" else>
+    <div
+      repeat.for="sound of activeSounds"
+      class="flex items-center w-48 p-2 text-xs cursor-pointer ${sound.isPlaying ? 'bg-green-100 rounded' : ''}"
+      click.delegate="removeSound(sound)"
+    >
+      <h1 class="font-semibold select-none">${sound.name}</h1>
+    </div>
+  </div>
+</div>

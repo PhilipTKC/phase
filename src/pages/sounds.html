@@ -1,0 +1,53 @@
+<div class="items-start md:flex">
+  <side-bar-filter> </side-bar-filter>
+
+  <div class="w-full">
+    <search-bar
+      sounds.bind="sounds"
+      update-sound-state.call="restoreSoundState(sounds)"
+      update-sound-collection.call="updateSoundCollection()"
+    >
+    </search-bar>
+
+    <div class="grid grid-cols-1 gap-8 p-4 mx-auto md:grid-cols-4">
+      <div
+        repeat.for="sound of sounds"
+        class="w-full p-2 my-2 text-xs cursor-pointer ${sound.isPlaying ? 'bg-indigo-400 rounded' : ''}"
+      >
+        <div
+          class="flex items-center w-48"
+          click.delegate="previewSound(sound)"
+        >
+          <div class="w-4 mr-2">
+            <div if.bind="!sound.isPlaying">
+              <i class="fa-solid fa-play"></i>
+            </div>
+            <div else>
+              <i class="text-yellow-400 fa-solid fa-pause fa-fade"></i>
+            </div>
+          </div>
+          <h1
+            class="font-semibold select-none ${sound.isPlaying ? 'text-white' : 'text-black'}"
+          >
+            ${sound.name}
+          </h1>
+          <i class="fa-solid fa-waveform"></i>
+        </div>
+
+        <div class="flex items-center mt-2">
+          <div class="w-6 mr-1 ${sound.isPlaying ? 'text-white':''}">
+            <i if.bind="sound.volume == 0" class="fa-solid fa-volume-off"> </i>
+            <i if.bind="sound.volume > 0" class="fa-solid fa-volume-low"> </i>
+          </div>
+          <input
+            type="range"
+            class="w-full h-1 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-indigo-100"
+            value.bind="sound.volume"
+            input.delegate="volumeChanged(sound)"
+            disabled.bind="!sound.isPlaying"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

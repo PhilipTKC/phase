@@ -1,0 +1,21 @@
+<div class="w-full px-4 text-sm select-none md:w-64">
+  <div class="my-2">
+    <h1 class="font-bold">Categories</h1>
+  </div>
+  <ol>
+    <li
+      repeat.for="category of state.categories"
+      class="cursor-pointer flex justify-between p-2 my-1 ${category.active ? 'bg-indigo-500 rounded text-white' : ''}"
+      click.delegate="toggleCategory(category.id)"
+    >
+      <span class="font-bold">${category.title}</span>
+      <div>
+        <span if.bind="category.activeSounds > 0" class="px-2 py-1 rounded-lg">
+          <i class="mx-2 fa-solid fa-music fa-beat-fade"></i>
+          ${category.activeSounds} /
+        </span>
+        ${category.count}
+      </div>
+    </li>
+  </ol>
+</div>
